@@ -50,6 +50,7 @@ export const useBlog = ({id} : {id : string} ) => {
 export const useBlogs = () => {
   const [loading, setLoading] = useState(true)
     const [blogs, setBlogs] = useState<Blog[]>([])
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => { 
      const fetching =  async () => {
@@ -61,8 +62,10 @@ export const useBlogs = () => {
         }}
         )
         setBlogs(response.data.blogs)
-         } catch (error) {
-          console.error('error while fetchig')
+         } catch (error:any) {
+          console.error('error while fetchig',error)
+          setError(error.message ?? "Something went wrong")
+          
          }finally{setLoading(false)}
         
         
@@ -75,5 +78,5 @@ export const useBlogs = () => {
 
   return {
     loading,
-    blogs}
+    blogs,error}
 }

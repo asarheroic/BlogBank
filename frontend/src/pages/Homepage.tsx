@@ -2,9 +2,25 @@ import { BlogCard } from "../components/BlogCard"
 import { BlogSkeleton } from "../components/BlogSkeleton"
 import HomeAppbar from "../components/HomeAppbar"
 import { useBlogs } from "../hooks"
+import HomeINTRO from '../components/HomeINTRO'
 
 const Homoepage = () => {
-    const { loading, blogs } = useBlogs()
+    const { loading, blogs,error} = useBlogs()
+
+
+    if (error) {
+        return (
+            
+            <div>
+                 <HomeAppbar/>
+                 <HomeINTRO/>
+                 
+                 
+            </div>
+        )
+    }
+
+   
 
     if (loading) {
         return(
